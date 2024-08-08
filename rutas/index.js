@@ -1,0 +1,38 @@
+import express from "express";
+import { paginaHoteles, paginaInicio, paginaCaracteristicas, paginaHabitaciones, paginaGerente, credenciales, cerrarSesion, listaGerentes, listaHoteles, listaHabitaciones } from "../controller/paginasControlador.js";
+import { guardarHabitacion, cambiarHabitacion, guardarHabitacionM, borrarHabitaciones, eliminarAsignacionHotel, asignarHotel} from "../controller/habitacionesControlador.js";
+import { guardarHotel, cambiarHotel, guardarHtlM, borrarHotel, eliminarAsignacionGerente, asignarGerente } from "../controller/hotelesControlador.js";
+import { guardarGerente, eliminarGerente, guardarGerenteM, cambiarGerente } from "../controller/gerentesControlador.js";
+import { guardarIHtl } from "../controller/imagenesHtlControlador.js";
+
+const rutas = express.Router();
+rutas.get("/", paginaInicio);
+rutas.get("/hoteles",paginaHoteles);
+rutas.get("/caracteristicas", paginaCaracteristicas);
+rutas.get("/cambiarHabitacion", cambiarHabitacion);
+rutas.get("/habitaciones", paginaHabitaciones);
+rutas.post("/habitaciones", guardarHabitacion);
+rutas.post("/guardarM", guardarHabitacionM);
+rutas.get("/borrarHabitacion", borrarHabitaciones);
+rutas.get("/crearHotel", paginaHoteles);
+rutas.post("/guardarHotel", guardarHotel);
+rutas.get("/gerentes", paginaGerente);
+rutas.post("/guardarGerente", guardarGerente);
+rutas.get("/eliminarG", eliminarGerente);
+rutas.get("/cambiarG", cambiarGerente);
+rutas.post("/guardarGerenteM", guardarGerenteM);
+rutas.get("/cambiarH", cambiarHotel);
+rutas.post("/guardarHtlM", guardarHtlM);
+rutas.get("/eliminarH", borrarHotel);
+rutas.post("/credenciales", credenciales);
+rutas.get("/cerrarSesion", cerrarSesion);
+rutas.post("/uploadImagenHtl", guardarIHtl);
+rutas.get("/listaGerentes", listaGerentes);
+rutas.get("/listaHoteles", listaHoteles);
+rutas.get("/listaHabitaciones", listaHabitaciones);
+rutas.get("/eliminarAsignacionGerente", eliminarAsignacionGerente);
+rutas.post("/asignarGerente", asignarGerente);
+rutas.get("/eliminarAsignacionHotel", eliminarAsignacionHotel);
+rutas.post("/asignarHotel", asignarHotel);
+
+export default rutas;

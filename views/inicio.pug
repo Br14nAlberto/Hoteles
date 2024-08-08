@@ -1,0 +1,22 @@
+extends ./layout/index.pug
+block compartircontenido
+    main.container.mt-1
+        .row 
+            .row.justify-content-start.col
+                h3 Colección de Hoteles
+            .row.justify-content-end.col.search
+                input#entrada.form-control(type='text' placeholder='Busca hotel...' onkeyup="myFunction()")
+        .row    
+            each hotel in hoteles
+                .col-md.col-lg-4.mv-4 
+                    .card.hoteles
+                        .card-body 
+                            h2.nombreH=hotel.nombre 
+                        .card-footer
+                            p
+                            | #{hotel.direccion}
+                            p 
+                            | #{hotel.telefono}
+                            p 
+                            | #{hotel.correo}
+                        a(href=`/caracteristicas?id=${hotel.id_htl}`, class='btn btn-success btn-clock') Mas datos

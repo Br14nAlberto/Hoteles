@@ -1,0 +1,27 @@
+extends ./layout/index.pug
+block compartircontenido 
+    main.container.mt-5 
+        .row 
+            .col-md-12 
+                h2.d-block.w-100.text-center Modificar Habitación 
+                if (errores)
+                    each error in errores
+                        .alert.col.alert-danger.text-center=error.mensaje
+            .row.justify-content-center.col 
+                .col-md-8 
+                    form(action="/guardarM" method="POST")
+                        .form-group
+                            label(for="nombre") Nombre
+                            input#Nombre(type ="text", placeholder ="Introduce el nombre",name ="nombre", class ="form-control", value = nombre)
+                        .form-group
+                            label(for="piso") Piso
+                            input#piso(type ="text", placeholder ="Tu imagen",name ="piso", class ="form-control", value = piso)
+                        .form-group
+                            label(for="refrigerador") Refrigerador
+                                select(name = "refrigerador", class ="form-control")
+                                    option(selected disabled='')  Selecciona una opcion 
+                                    option(value="true") Si 
+                                    option(value="false") No
+                            input#id_hbt(type ="hidden",name ="id_hbt", class ="form-control", value = `${id_hbt}`)
+                            input#id_htl(type ="hidden",name ="id_htl", class ="form-control", value = `${id_htl}`)
+                        input.btn.btn-success.btn-block(type="submit")

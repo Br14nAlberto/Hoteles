@@ -1,0 +1,35 @@
+extends ./layout/index.pug
+block compartircontenido
+    main.container.mt-1
+        .row.justify-content-center
+            h2 Lista Habitaciones
+        if (errores)
+            each error in errores
+                .alert.col.alert-danger.text-center=error.mensaje
+        .row    
+            each habitacion in habitaciones
+                .col-md.col-lg-4.mv-4 
+                    .card 
+                        .card-body
+                            h2=habitacion.nombre 
+                            p 
+                            | Piso: #{habitacion.piso}
+                            if habitacion.refrigerador
+                                p Refrigerador: Si
+                            else 
+                                p Refrigerador: No
+                            a(href=`/cambiarHabitacion?id=${habitacion.id_hbt}`, class='btn btn-success btn-clock') Modificar
+                            a(href=`/borrarHabitacion?id=${habitacion.id_hbt}`, class='btn btn-danger btn-clock') Borrar
+                            .row
+                                each hotel in hoteles
+                                    if hotel.id_htl == habitacion.id_htl
+                                        h2 Hotel: #{hotel.nombre}
+                                        a(href=`/eliminarAsignacionHotel?id=${habitacion.id_hbt}`, class='btn btn-danger btn-clock') Eliminar Asignacion 
+                                if  habitacion.id_htl == null
+                                    form(action=href=`/asignarHotel?id_hbt=${habitacion.id_hbt}`, method="POST")
+                                        select(name="hotel", class ="form-control")
+                                            option(selected)  Selecciona una opcion 
+                                            each hotel in hoteles
+                                                option(value=hotel.id_htl) #{hotel.nombre}
+                                        input#id_hbt(type ="hidden",name ="id_hbt", class ="form-control", value = habitacion.id_hbt)    
+                                        input.btn.btn-success.btn-block(type="submit")

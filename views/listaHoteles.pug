@@ -1,0 +1,36 @@
+extends ./layout/index.pug
+block compartircontenido
+    main.container.mt-1
+        .row.justify-content-center
+            h2 Lista Hoteles
+        if (errores)
+            each error in errores
+                .alert.col.alert-danger.text-center=error.mensaje
+        .row    
+            each hotel in hoteles
+                .col-md.col-lg-4.mv-4 
+                    .card.hoteles
+                        .card-body 
+                            h2.nombreH=hotel.nombre 
+                        .card-footer
+                            each gerente in gerentes
+                                if hotel.id_grt == gerente.id_grt
+                                    p Gerente: #{gerente.nombre} #{gerente.ap_paterno} #{gerente.ap_materno}
+                                    a(href=`/eliminarAsignacionGerente?id=${hotel.id_htl}`, class='btn btn-danger btn-clock') Eliminar Asignacion 
+                            if hotel.id_grt == null
+                                form(action=href=`/asignarGerente?id_htl=${hotel.id_htl}`, method="POST")
+                                    select(name="gerente", class ="form-control")
+                                        option(selected)  Selecciona una opcion 
+                                        each gerente in gerentes
+                                            option(value=gerente.id_grt)  #{gerente.nombre} #{gerente.ap_paterno} #{gerente.ap_materno}
+                                    input#id_hotel(type ="hidden",name ="id_hotel", class ="form-control", value = hotel.id_htl)    
+                                    input.btn.btn-success.btn-block(type="submit")
+                            p
+                            | #{hotel.direccion}
+                            p 
+                            | #{hotel.telefono}
+                            p 
+                            | #{hotel.correo}
+                            .row.justify-content-center.col
+                                a(href=`/cambiarH?id_htl=${hotel.id_htl}`, class='btn btn-success btn-clock') Modificar
+                                a(href=`/eliminarH?id_htl=${hotel.id_htl}`, class='btn btn-danger btn-clock') Eliminar

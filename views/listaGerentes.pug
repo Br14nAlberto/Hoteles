@@ -1,0 +1,15 @@
+extends ./layout/index.pug
+block compartircontenido
+    main.container.mt-1
+        .row.justify-content-center
+            h2 Lista Gerentes
+        .row    
+            each gerente in gerentes
+                .col-md.col-lg-4.mv-4 
+                    .card.hoteles
+                        .card-body
+                            h3 #{gerente.nombre} #{gerente.ap_paterno} #{gerente.ap_materno}
+                            h5 #{gerente.telefono}
+                            .row.justify-content-center.col
+                                a(href=`/cambiarG?id_grt=${gerente.id_grt}`, class='btn btn-success btn-clock') Modificar
+                                a(href=`/eliminarG?id_grt=${gerente.id_grt}`, class='btn btn-danger btn-clock') Eliminar

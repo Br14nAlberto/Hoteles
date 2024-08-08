@@ -1,0 +1,27 @@
+extends ./layout/index.pug
+block compartircontenido 
+    main.container.mt-5 
+        h1.text-center.mt-5 #{pagina}
+        .row 
+            .col-md-12 
+                h2.d-block.w-100.text-center Datos Gerente
+                if (errores)
+                    each error in errores
+                        .alert.col.alert-danger.text-center=error.mensaje
+            .row.justify-content-center.col 
+                .col-md-8 
+                    form(action="/guardarGerenteM" method="POST")
+                        .form-group
+                            label(for="nombre") Nombre
+                            input#Nombre(type ="text", placeholder ="Introduce el nombre",name ="nombre", class ="form-control", value = nombre)
+                        .form-group
+                            label(for="ap_paterno") Apellido Paterno
+                            input#ap_paterno(type ="text", placeholder ="Introduce el primer apellido",name ="ap_paterno", class ="form-control", value = ap_paterno)
+                        .form-group
+                            label(for="ap_materno") Apellido Materno
+                            input#ap_materno(type ="text", placeholder ="Introduce el segundo apellido",name ="ap_materno", class ="form-control", value = ap_materno)
+                        .form-group
+                            label(for="telefono") Telefono
+                            input#telefono(type ="text", placeholder ="Introduce el correo",name ="telefono", class ="form-control", value = telefono) 
+                            input#id(type ="hidden",name ="id", class ="form-control", value = id_grt)
+                        input.btn.btn-success.btn-block(type="submit")
